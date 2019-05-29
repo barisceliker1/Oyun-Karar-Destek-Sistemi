@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="utf-8"/>
+<title>Yönetim Bilişim Sistemleri</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+<style type="text/css">
+body{
+background-color:#ffffff;
+
+}
+
+ div#header a{
+ position: relative;
+ top:-85px;
+ left:490px;
+ }
+div#header{
+position:fixed;
+top:0px;
+left:0px;
+width:100%;
+height:10%;
+
+background-color:#0e0909;
+padding:8px;
+}
+div#yan{
+position:fixed;
+top:0px;
+left:0px;
+height:100%;
+width:15%;
+background-color:#222;
+padding:8px;
+}
+div {
+position: absolute;
+
+left: 400px;
+top: 150px;
+
+width:650px;
+height:300px;
+
+
+
+
+
+}
+h1{
+position: relative;
+top:80px;
+left:480px;
+width:600px;
+height:-50px;
+}
+#admin img{
+position: relative;
+width:50px;
+height:50px;
+top:-142px;
+left:890px;
+
+
+}
+div myChart1{
+position: relative;
+width:300px;
+height:200px;
+left:600px;
+top:90px;
+}
+@font-face {
+    font-family: "open";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+position: relative;
+left:0px;
+top:70px;
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+    text-decoration: none;
+    color: inherit;
+}
+
+@keyframes linear {
+    
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 200px 0;
+    }
+    
+}
+
+@keyframes donence {
+    
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 60px;
+    }
+    
+}
+
+@keyframes yuklen {
+    
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 85px;
+    }
+    
+}
+
+@keyframes yilan {
+    
+    0%, 100% {
+        background-position: 20px -30px;
+    }
+    25% {
+        background-position: 150px 5px;
+    }
+    50% {
+        background-position: 20px 40px;
+    }
+    75% {
+        background-position: -100px 5px;
+    }
+    
+}
+
+.cerc {
+    width: 150px;
+	height:50px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    color: #333;
+    font: 12px open, tahoma;
+	font-weight: bold;
+}
+.cerc:before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    transform: scale( 1.02, 1.08 );
+    position: absolute;
+    background: #f00;
+    background: linear-gradient( 90deg, #fafafa, #fafafa, #1D8EF7, #fafafa, #fafafa );
+    background-position: 55px 0;
+    top: 0;
+    animation: linear 1s infinite linear;
+    left: 0;
+    z-index: -1;
+}
+
+.cerc.donence:before {
+    background: radial-gradient( #fafafa, #fafafa, #F2A61A, #fafafa, #fafafa );
+    animation: donence 1s infinite linear;
+}
+
+.cerc.yuklen:before {
+    background: repeating-linear-gradient( -45deg, #fafafa, #fafafa 30px, #5FC914 30px, #5FC914 60px ) fixed;
+    animation: yuklen 1s infinite linear;
+}
+
+.cerc.yilan:before {
+    background: radial-gradient( #EA238D, #EA238D, #EA238D, #EA238D, #fafafa, #fafafa ) no-repeat;
+    background-size: 150px 50px;
+    animation: yilan 2s infinite linear;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+showGraph();
+});
+function showGraph(){
+
+$.post("saas2.php",
+function(data){
+console.log(data);
+var aylar=[];
+var gelirler=[];
+for (var i in data){
+aylar.push(data[i].Yer);
+gelirler.push(data[i].Hacim);
+
+};
+var chartdata={
+labels:aylar,
+animationEnabled: true,
+	exportEnabled: true,
+
+
+datasets:[
+{
+label:'Ülke Bazlı Oyun Sektörü Harcamaları',
+data:gelirler,
+fill:false,
+borderColor:"rgb(75, 192, 192)",
+backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#ffdf00"]
+}]
+};
+var cnv=$("#myChart");
+var barGraph=new Chart(cnv,{
+type:'line',
+data:chartdata,
+
+});
+});
+};
+
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+
+
+</head>
+<body>
+
+
+
+
+<div id="yan">
+<a href="adminpanel.html" class="cerc yilan">Popüler Türler</a>
+<a href="konsolsatislari.html" class="cerc yilan">Yıllık Konsol Satısları</a>
+<a href="denemee.html" class="cerc yilan">Market Hacimleri</a>
+
+</div>
+
+
+<div>
+<canvas id="myChart" ></canvas>
+</div>
+<div id="header">
+<img src="sitelogo.jpg"/>
+<a href="Panel.html" class="cerc yilan">Admin Paneli</a>
+
+
+</div>
+</div>
+<h1>Ülkelerin Oyun Sektörü Harcamaları</h1>
+
+</body>
+
+</html>
